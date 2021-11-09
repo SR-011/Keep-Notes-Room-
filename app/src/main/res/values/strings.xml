@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Calendar Event</string>
+    <string name="show_event">Show events</string>
+    <string name="show_dialog">show dialog</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+</resources>
