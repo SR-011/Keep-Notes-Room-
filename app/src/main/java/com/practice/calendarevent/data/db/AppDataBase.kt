@@ -9,10 +9,10 @@ import com.practice.calendarevent.data.model.Event
 
 @Database(entities = [Event::class], version = 1)
 abstract class AppDataBase: RoomDatabase() {
-    abstract val eventDao: EventDao
     abstract fun eventDao(): EventDao
     companion object{
         @Volatile
+       // private var INSTANCE : AppDataBase? = null
         private var appDatabase: AppDataBase? = null
         fun getInstance(context: Context): AppDataBase? {
             synchronized(this){

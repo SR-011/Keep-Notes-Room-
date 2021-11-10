@@ -19,7 +19,7 @@ class EventViewModel(private val eventRepository: EventRepository): ViewModel() 
     }
     fun getEvents() {
         viewModelScope.launch {
-            val event = eventRepository.loadEvent()
+            val event = eventRepository.getEvent()
         }
     }
 }
