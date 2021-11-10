@@ -2,9 +2,11 @@ package com.practice.calendarevent.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -24,7 +26,6 @@ class MainActivity : AppCompatActivity() {
             }
         })*/
 
-
         binding.fab.setOnClickListener {
             createDialog()
         }
@@ -37,10 +38,15 @@ class MainActivity : AppCompatActivity() {
             setMessage("Create new event?")
             alertDialog.setView(layoutInflater.inflate(R.layout.custom_layout, null))
             setPositiveButton("Yes") { _, _ ->
-
+                val positiveButtonStatus = "yes"
+                val title: TextView = findViewById(R.id.title)
+                val description: TextView = findViewById(R.id.description)
+                val titleText = title.text
+                val descriptionText = description.text
+                Log.d("TAG", "createDialog: $positiveButtonStatus, $titleText, ${title.id}, $descriptionText, ${description.id} ")
             }
             setNegativeButton("No") {_, _ ->
-
+                val negativeButtonStatus = "No"
             }
         }.create().show()
 

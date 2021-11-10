@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "event_table")
 data class Event(
     @PrimaryKey(autoGenerate = true) val  id: Int,
-    @ColumnInfo(name = "t") val title: String,
-    @ColumnInfo(name = "bv") val description: String
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "description") val description: String
 )
