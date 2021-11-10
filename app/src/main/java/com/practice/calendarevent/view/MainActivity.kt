@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         materialAlertDialogBuilder.setView(customView)
             .setMessage("Create new event?")
-            .setTitle("Details")
-            .setMessage("Enter your basic details")
             .setPositiveButton("Yes") { dialog, _ ->
                 val positiveButtonStatus = "Accept"
                 val titleText = title.text.toString()

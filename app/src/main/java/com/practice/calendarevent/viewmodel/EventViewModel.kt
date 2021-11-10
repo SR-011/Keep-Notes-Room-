@@ -1,4 +1,8 @@
 package com.practice.calendarevent.viewmodel
 
-class EventViewModel {
+import androidx.lifecycle.ViewModel
+import com.practice.calendarevent.data.repository.EventRepository
+
+class EventViewModel(private val eventRepository: EventRepository): ViewModel() {
+
 }
