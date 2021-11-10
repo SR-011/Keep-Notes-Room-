@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 val descriptionText = description.text.toString()
                 val timeStamp: String = DateFormat.getDateTimeInstance().format(Date())
                 Log.d("Sohel", "createDialog: $positiveButtonStatus, $titleText, $descriptionText $timeStamp ")
+                Event(status = "", description = "", title = "", timeStamp = "")
 
             }
             .setNegativeButton("No") { dialog, _ ->
