@@ -1,4 +1,4 @@
-package com.practice.calendarevent.data.api
+package com.practice.calendarevent.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -10,6 +10,7 @@ import com.practice.calendarevent.data.model.Event
 interface EventDao {
     @Insert
     suspend fun insertEvent(event: Event)
+
     @Query ("SELECT * FROM event_table")
     //suspend fun loadEvents(): LiveData<List<Event>>
     fun getEvents(): LiveData<List<Event>>

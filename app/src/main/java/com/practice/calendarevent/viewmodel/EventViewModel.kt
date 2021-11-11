@@ -1,5 +1,7 @@
 package com.practice.calendarevent.viewmodel
 
+import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,18 +10,21 @@ import com.practice.calendarevent.data.model.Event
 import com.practice.calendarevent.data.repository.EventRepository
 import kotlinx.coroutines.launch
 
-class EventViewModel(private val eventRepository: EventRepository): ViewModel() {
-    private val _eventList = MutableLiveData<List<Event>>()
-    val eventList: LiveData<List<Event>> = _eventList
+class EventViewModel(application: Application) : ViewModel() {
+    private val eventRepository = EventRepository(application)
+    private var _eventList = MutableLiveData<List<Event>>()
+    var eventList: LiveData<List<Event>>? = null
 
-    fun setEvents(){
+    init {
+        Log.d("sohel", "view model initiated")
+        getEvents()
+    }
+    fun insertEvents(event: Event) {
         viewModelScope.launch {
-            val event = eventRepository.insertEvent(event = Event())
+            eventRepository.insertEvent(event)
         }
     }
     fun getEvents() {
-        viewModelScope.launch {
-            val event = eventRepository.getEvent()
-        }
+        eventList = eventRepository.getEvent()
     }
 }
