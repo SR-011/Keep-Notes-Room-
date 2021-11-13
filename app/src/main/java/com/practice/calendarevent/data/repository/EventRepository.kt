@@ -6,11 +6,14 @@ import androidx.lifecycle.LiveData
 import com.practice.calendarevent.data.db.AppDataBase
 import com.practice.calendarevent.data.model.Event
 
-class EventRepository(application: Application) {
-    private val db = AppDataBase.getInstance(application)
+class EventRepository() {
+    private val db = AppDataBase.getInstance()
     private val dao = db?.eventDao()
 
     fun getEvent(): LiveData<List<Event>>? {
+        /*dao?.getEvents()?.observeForever {
+            Log.d("TAG", "getEvent: $")
+        }*/
         return dao?.getEvents()
     }
 

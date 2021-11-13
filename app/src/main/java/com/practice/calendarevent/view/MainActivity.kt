@@ -16,19 +16,18 @@ import com.practice.calendarevent.viewmodel.EventViewModel
 import java.text.DateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EventAdapter.OnEventClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var customView: View
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
     private lateinit var eventViewModel: EventViewModel
     private lateinit var eventAdapter: EventAdapter
-    private var eventList = listOf<Event>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         materialAlertDialogBuilder = MaterialAlertDialogBuilder(this)
-        eventViewModel = EventViewModel(application)
+        eventViewModel = EventViewModel()
 
         binding.fab.setOnClickListener {
             customView = LayoutInflater.from(this)
@@ -40,17 +39,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        eventViewModel.eventList?.observe(this,{
-            eventList = it
-            Log.d("Sohel", "setupObserver: $eventList")
-            eventAdapter.addEvent(eventList)
+        eventViewModel.eventList?.observe(this, {
+            Log.d("Sohel", "setupObserver: $it")
+            eventAdapter.addEvent(it)
         })
     }
 
-    private fun setupUi(){
-        eventAdapter = EventAdapter()
+    private fun setupUi() {
+        eventAdapter = EventAdapter(this)
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = eventAdapter
     }
@@ -62,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         materialAlertDialogBuilder.setView(customView)
             .setMessage("Create new event?")
             .setPositiveButton("Yes") { _, _ ->
-                val positiveButtonStatus = "Accept"
+                val positiveButtonStatus = "Accepted"
                 val titleText = title.text.toString()
                 val descriptionText = description.text.toString()
                 val timeStamp: String = DateFormat.getDateTimeInstance().format(Date())
@@ -80,10 +77,9 @@ class MainActivity : AppCompatActivity() {
                     //do action here
                     Log.d("Sohel", "createDialog: $event")
                 }
-
             }
             .setNegativeButton("No") { _, _ ->
-                val negativeButtonStatus = "Decline"
+                val negativeButtonStatus = "Declined"
                 val titleText = title.text.toString()
                 val descriptionText = description.text.toString()
                 val timeStamp: String = DateFormat.getDateTimeInstance().format(Date())
@@ -104,6 +100,10 @@ class MainActivity : AppCompatActivity() {
                         Log.d("Sohel", "createDialog: $event")
                     }
             }.show()
+    }
+
+    override fun onEventClick(event: Event) {
+        Log.d("Sohel", "onEventClick: ${event.title}")
     }
 
 }

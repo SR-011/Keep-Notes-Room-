@@ -10,8 +10,8 @@ import com.practice.calendarevent.data.model.Event
 import com.practice.calendarevent.data.repository.EventRepository
 import kotlinx.coroutines.launch
 
-class EventViewModel(application: Application) : ViewModel() {
-    private val eventRepository = EventRepository(application)
+class EventViewModel() : ViewModel() {
+    private val eventRepository = EventRepository()
     private var _eventList = MutableLiveData<List<Event>>()
     var eventList: LiveData<List<Event>>? = null
 
@@ -24,7 +24,7 @@ class EventViewModel(application: Application) : ViewModel() {
             eventRepository.insertEvent(event)
         }
     }
-    fun getEvents() {
+    private fun getEvents() {
         eventList = eventRepository.getEvent()
     }
 }
