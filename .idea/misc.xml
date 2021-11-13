@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Rana/AndroidStudioProjects/calendar/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
         <entry key="..\:/Users/Rana/AndroidStudioProjects/calendar/app/src/main/res/layout/custom_layout.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/Rana/AndroidStudioProjects/calendar/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
+        <entry key="..\:/Users/Rana/AndroidStudioProjects/calendar/app/src/main/res/layout/item_row.xml" value="0.1921875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32760416666666664" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/item_row.xml" value="0.23822463768115942" />

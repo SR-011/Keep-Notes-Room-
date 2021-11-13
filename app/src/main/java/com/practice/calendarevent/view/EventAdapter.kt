@@ -9,13 +9,18 @@ import com.practice.calendarevent.R
 import com.practice.calendarevent.data.model.Event
 import com.practice.calendarevent.databinding.ItemRowBinding
 
-class EventAdapter: RecyclerView.Adapter<EventAdapter.ViewHolder>() {
+class EventAdapter(private val listener: OnEventClickListener) :
+    RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     var eventList: ArrayList<Event> = ArrayList()
-    class ViewHolder(val binding:ItemRowBinding) :
+
+    class ViewHolder(val binding: ItemRowBinding, private val listener: OnEventClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event) {
             binding.variable = event
+            binding.root.setOnClickListener {
+                listener.onEventClick(event)
+            }
         }
     }
 
@@ -26,17 +31,23 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.ViewHolder>() {
                 R.layout.item_row,
                 parent,
                 false
-            )
+            ),listener
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(eventList[position])
     }
+
     fun addEvent(event: List<Event>) {
         eventList = event as ArrayList<Event>
         notifyDataSetChanged()
         Log.d("sohel", "addEvent: ")
     }
-    override fun getItemCount():Int = eventList.size
+
+    override fun getItemCount(): Int = eventList.size
+
+    interface OnEventClickListener {
+        fun onEventClick(event: Event)
+    }
 }
