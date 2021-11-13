@@ -11,7 +11,7 @@ interface EventDao {
     @Insert
     suspend fun insertEvent(event: Event)
 
-    @Query ("SELECT * FROM event_table")
+    @Query ("SELECT * FROM event_table ORDER BY id DESC")
     //suspend fun loadEvents(): LiveData<List<Event>>
     fun getEvents(): LiveData<List<Event>>
 }
