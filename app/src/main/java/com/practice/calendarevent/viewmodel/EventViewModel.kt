@@ -1,6 +1,5 @@
 package com.practice.calendarevent.viewmodel
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +24,8 @@ class EventViewModel() : ViewModel() {
         }
     }
     private fun getEvents() {
-        eventList = eventRepository.getEvent()
+        viewModelScope.launch {
+            eventList = eventRepository.getEvent()
+        }
     }
 }

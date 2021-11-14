@@ -8,7 +8,7 @@ import com.practice.calendarevent.data.model.Event
 
 @Database(entities = [Event::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {
-    abstract fun eventDao(): EventDao
+    abstract fun getEventDao(): EventDao
 
     companion object {
         @Volatile
