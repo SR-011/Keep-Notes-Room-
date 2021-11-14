@@ -32,6 +32,8 @@ class DetailFragment : Fragment() {
     private fun setupUi() {
         binding.title.setText(event.title).toString()
         binding.description.text = event.description
+        binding.status.text = event.status
+        binding.timestamp.text = event.timeStamp
         Log.d("bundle", "setupUi: ${event.title}")
     }
 }

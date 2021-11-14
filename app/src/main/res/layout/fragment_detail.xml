@@ -34,7 +34,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{variable.title}"
+        android:text="@string/birthday"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="@{variable.description}"
+        android:text="@string/birthday_party_will_be_arranged"
         android:textSize="14sp"
         android:lines="4"
         android:layout_margin="10dp"
@@ -77,9 +77,10 @@
             />
 
         <TextView
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{variable.status}"
+            android:text="@string/accepted"
             android:textSize="14sp"
             android:textColor="@color/black"
             />
@@ -105,9 +106,10 @@
             />
 
         <TextView
+            android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{variable.timeStamp}"
+            android:text="@string/nov_15_2021_16_25_59"
             android:textSize="14sp"
             android:textColor="@color/black"
             />
