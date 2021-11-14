@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/eventFragment">
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.practice.calendarevent.viewmodel.EventFragment"
+        android:label="EventFragment" >
+        <action
+            android:id="@+id/action_eventFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.practice.calendarevent.view.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="event"
+            app:argType="com.practice.calendarevent.data.model.Event"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_detailFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+    </fragment>
+</navigation>
