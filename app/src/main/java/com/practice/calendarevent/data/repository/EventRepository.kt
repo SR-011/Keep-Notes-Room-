@@ -9,7 +9,7 @@ class EventRepository() {
     private val db = AppDataBase.getInstance()
     private val dao = db?.getEventDao()
 
-    fun getEvent(): LiveData<List<Event>>? {
+    fun getEvent(): List<Event>? {
         return dao?.getEvents()
     }
 
