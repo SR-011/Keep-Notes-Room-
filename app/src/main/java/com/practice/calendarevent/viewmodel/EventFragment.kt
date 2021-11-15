@@ -71,7 +71,7 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
 
         materialAlertDialogBuilder.setView(customView)
             .setMessage("Create new event?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setPositiveButton("Accept") { _, _ ->
                 val positiveButtonStatus = "Accepted"
                 val titleText = title.text.toString()
                 val descriptionText = description.text.toString()
@@ -91,7 +91,7 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
                     Log.d("Sohel", "createDialog: $event")
                 }
             }
-            .setNegativeButton("No") { _, _ ->
+            .setNegativeButton("Decline") { _, _ ->
                 val negativeButtonStatus = "Declined"
                 val titleText = title.text.toString()
                 val descriptionText = description.text.toString()
