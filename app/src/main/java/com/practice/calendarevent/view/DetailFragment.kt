@@ -32,18 +32,10 @@ class DetailFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        eventViewModel.selectedEvent?.observe(viewLifecycleOwner, {
+        eventViewModel.selectedEvent.observe(viewLifecycleOwner, {
             event = it
-            setupUi()
+            binding.variable = it
             Log.d("Sohel", "setupObserver: $it")
         })
-    }
-
-    private fun setupUi() {
-        binding.title.setText(event.title).toString()
-        binding.description.text = event.description
-        binding.status.text = event.status
-        binding.timestamp.text = event.timeStamp
-        Log.d("bundle", "setupUi: ${event.title}")
     }
 }
