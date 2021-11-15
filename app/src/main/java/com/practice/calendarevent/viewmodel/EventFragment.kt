@@ -25,7 +25,7 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
 
     private lateinit var customView: View
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
-    private val eventViewModel : EventViewModel by viewModels()
+    private val eventViewModel : EventViewModel by activityViewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var binding: FragmentEventBinding
     lateinit var eventList: ArrayList<Event>
