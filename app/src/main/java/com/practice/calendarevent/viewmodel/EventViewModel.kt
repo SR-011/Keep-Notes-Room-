@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practice.calendarevent.data.model.Event
 import com.practice.calendarevent.data.repository.EventRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EventViewModel() : ViewModel() {
     private val eventRepository = EventRepository()
     private var _eventList = MutableLiveData<List<Event>>()
-    var eventList: LiveData<List<Event>>? = null
+    var eventList: LiveData<List<Event>>? = _eventList //null
 
     init {
         Log.d("sohel", "view model initiated")
@@ -21,11 +22,12 @@ class EventViewModel() : ViewModel() {
     fun insertEvents(event: Event) {
         viewModelScope.launch {
             eventRepository.insertEvent(event)
+            getEvents()
         }
     }
     private fun getEvents() {
-        viewModelScope.launch {
-            eventList = eventRepository.getEvent()
+        viewModelScope.launch(Dispatchers.IO) {
+            _eventList.postValue(eventRepository.getEvent())
         }
     }
 }
