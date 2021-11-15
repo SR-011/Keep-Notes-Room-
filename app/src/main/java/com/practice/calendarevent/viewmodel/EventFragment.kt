@@ -26,6 +26,8 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
     private lateinit var eventViewModel: EventViewModel
     private lateinit var eventAdapter: EventAdapter
     private lateinit var binding: FragmentEventBinding
+    lateinit var eventList: ArrayList<Event>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +36,7 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
         materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
         eventViewModel = EventViewModel()
-
+        eventList = ArrayList()
         binding.fab.setOnClickListener {
             customView = LayoutInflater.from(requireContext())
                 .inflate(R.layout.custom_layout, null, false)
@@ -45,15 +47,18 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
         return binding.root
     }
 
+
     private fun setupObserver() {
-        eventViewModel.eventList?.observe(requireActivity(), {
+        eventViewModel.eventList?.observe(viewLifecycleOwner, {
             Log.d("Sohel", "setupObserver: $it")
-            eventAdapter.addEvent(it)
+            eventList.clear()
+            eventList.addAll(it)
+            eventAdapter.notifyDataSetChanged()
         })
     }
 
     private fun setupUi() {
-        eventAdapter = EventAdapter(this)
+        eventAdapter = EventAdapter(this, eventList)
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = eventAdapter
