@@ -14,6 +14,7 @@ class EventViewModel() : ViewModel() {
     private val eventRepository = EventRepository()
     private var _eventList = MutableLiveData<List<Event>>()
     var eventList: LiveData<List<Event>>? = _eventList //null
+    val selectedEvent = MutableLiveData<Event>()
 
     init {
         Log.d("sohel", "view model initiated")
@@ -29,5 +30,9 @@ class EventViewModel() : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _eventList.postValue(eventRepository.getEvent())
         }
+    }
+
+    fun selectEvent(event: Event) {
+        selectedEvent.value = event
     }
 }

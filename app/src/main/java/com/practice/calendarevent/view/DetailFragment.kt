@@ -2,16 +2,19 @@ package com.practice.calendarevent.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.practice.calendarevent.R
 import com.practice.calendarevent.data.model.Event
 import com.practice.calendarevent.databinding.FragmentDetailBinding
+import com.practice.calendarevent.viewmodel.EventViewModel
 
 class DetailFragment : Fragment() {
+    private val eventViewModel : EventViewModel by viewModels()
     private lateinit var binding: FragmentDetailBinding
     private lateinit var event: Event
 
@@ -19,13 +22,21 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        arguments?.let {
+       /* arguments?.let {
             event = it.getParcelable("key")!!
             Log.d("bundle", "onCreateView: $event")
-        }
+        }*/
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        setupUi()
+        setupObserver()
         return binding.root
+    }
+
+    private fun setupObserver() {
+        eventViewModel.selectedEvent?.observe(viewLifecycleOwner, {
+            event = it
+            setupUi()
+            Log.d("Sohel", "setupObserver: $it")
+        })
     }
 
     private fun setupUi() {

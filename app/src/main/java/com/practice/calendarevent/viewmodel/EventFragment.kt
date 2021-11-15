@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,7 +25,7 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
 
     private lateinit var customView: View
     private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
-    private lateinit var eventViewModel: EventViewModel
+    private val eventViewModel : EventViewModel by viewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var binding: FragmentEventBinding
     lateinit var eventList: ArrayList<Event>
@@ -31,11 +33,10 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event, container, false)
         materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
-        eventViewModel = EventViewModel()
         eventList = ArrayList()
         binding.fab.setOnClickListener {
             customView = LayoutInflater.from(requireContext())
@@ -115,7 +116,8 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
     }
 
     override fun onEventClick(event: Event) {
-        findNavController().navigate(R.id.detailFragment, bundleOf("key" to event))
+        eventViewModel.selectEvent(event)
+        findNavController().navigate(R.id.detailFragment)
         Log.d("Sohel", "onEventClick: ${event.title}")
     }
 }
