@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -119,5 +117,9 @@ class EventFragment : Fragment(), EventAdapter.OnEventClickListener {
         eventViewModel.selectEvent(event)
         findNavController().navigate(R.id.detailFragment)
         Log.d("Sohel", "onEventClick: ${event.title}")
+    }
+
+    override fun onDeleteIconClick(event: Event) {
+        eventViewModel.deleteEvent(event)
     }
 }

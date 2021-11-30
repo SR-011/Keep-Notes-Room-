@@ -14,7 +14,8 @@ class EventViewModel() : ViewModel() {
     private val eventRepository = EventRepository()
     private var _eventList = MutableLiveData<List<Event>>()
     var eventList: LiveData<List<Event>>? = _eventList //null
-    val selectedEvent = MutableLiveData<Event>()
+    private var _selectedEvent = MutableLiveData<Event>()
+     var selectedEvent:LiveData<Event> = _selectedEvent
 
     init {
         Log.d("sohel", "view model initiated")
@@ -26,6 +27,21 @@ class EventViewModel() : ViewModel() {
             getEvents()
         }
     }
+
+    fun deleteEvent(event: Event) {
+        viewModelScope.launch {
+            eventRepository.deleteEvent(event)
+            getEvents()
+        }
+    }
+
+    fun updateEvent(event: Event) {
+        viewModelScope.launch {
+            eventRepository.updateEvent(event)
+            getEvents()
+        }
+    }
+
     private fun getEvents() {
         viewModelScope.launch(Dispatchers.IO) {
             _eventList.postValue(eventRepository.getEvent())
@@ -33,6 +49,6 @@ class EventViewModel() : ViewModel() {
     }
 
     fun selectEvent(event: Event) {
-        selectedEvent.value = event
+        _selectedEvent.value = event
     }
 }

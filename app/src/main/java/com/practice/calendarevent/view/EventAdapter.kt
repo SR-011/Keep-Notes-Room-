@@ -1,6 +1,5 @@
 package com.practice.calendarevent.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -18,6 +17,9 @@ class EventAdapter(private val listener: OnEventClickListener, private val event
             binding.variable = event
             binding.root.setOnClickListener {
                 listener.onEventClick(event)
+            }
+            binding.delete.setOnClickListener {
+                listener.onDeleteIconClick(event)
             }
         }
     }
@@ -41,5 +43,6 @@ class EventAdapter(private val listener: OnEventClickListener, private val event
 
     interface OnEventClickListener {
         fun onEventClick(event: Event)
+        fun onDeleteIconClick(event: Event)
     }
 }

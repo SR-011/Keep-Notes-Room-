@@ -13,4 +13,6 @@
     <string name="accepted">Accepted</string>
     <string name="date">Date:</string>
     <string name="nov_15_2021_16_25_59">Nov 15, 2021 16:25:59</string>
+    <string name="delete">Delete</string>
+    <string name="update">update</string>
 </resources>
